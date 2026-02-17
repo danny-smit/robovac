@@ -67,6 +67,7 @@ class TestT2278StatusCommand:
         assert mock_t2278_robovac.getRoboVacHumanReadableValue(RobovacCommand.STATUS, "BBAHQgA=") == "Heading Home"
         assert mock_t2278_robovac.getRoboVacHumanReadableValue(RobovacCommand.STATUS, "BgoAEAUyAA==") == "Cleaning"
         assert mock_t2278_robovac.getRoboVacHumanReadableValue(RobovacCommand.STATUS, "BgoAEAVSAA==") == "Positioning"
+        assert mock_t2278_robovac.getRoboVacHumanReadableValue(RobovacCommand.STATUS, "BgoAEAdCAA==") == "Heading Home Mid Clean"
         assert mock_t2278_robovac.getRoboVacHumanReadableValue(RobovacCommand.STATUS, "BhADGgIIAQ==") == "Completed"
 
     def test_status_room_cleaning_values(self, mock_t2278_robovac: RoboVac) -> None:
@@ -172,6 +173,7 @@ class TestT2278ActivityMapping:
         """Test returning state maps to VacuumActivity.RETURNING."""
         mapping = mock_t2278_robovac.model_details.activity_mapping
         assert mapping["Heading Home"] == VacuumActivity.RETURNING
+        assert mapping["Heading Home Mid Clean"] == VacuumActivity.RETURNING
 
     def test_activity_mapping_idle_states(self, mock_t2278_robovac: RoboVac) -> None:
         """Test idle states map to VacuumActivity.IDLE."""
